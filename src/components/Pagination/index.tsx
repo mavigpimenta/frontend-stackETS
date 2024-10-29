@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { PaginationWrapper, PageButton } from "./styled.module"; // Assumindo que você já tem um styled component
+import { PaginationWrapper, PageButton } from "./styled.module"; 
 
 interface PaginationProps {
     currentPage: number;
@@ -8,7 +8,7 @@ interface PaginationProps {
 }
 
 const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange }) => {
-    const [visiblePages, setVisiblePages] = useState<number | string[]>([]);
+    const [visiblePages, setVisiblePages] = useState<(number | string)[]>([]);
 
     useEffect(() => {
         setVisiblePages(getVisiblePages(currentPage, totalPages));
@@ -56,11 +56,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
     return (
         <PaginationWrapper>
             {visiblePages.map((page, index) => (
-                <PageButton 
-                    key={index} 
-                    onClick={() => handlePageChange(page)} 
-                    disabled={page === currentPage}
-                >
+                <PageButton key={index} onClick={() => handlePageChange(page)} disabled={page === currentPage}>
                     {page}
                 </PageButton>
             ))}

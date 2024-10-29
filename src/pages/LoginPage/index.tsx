@@ -29,15 +29,19 @@ export const LoginPage = () => {
 
       console.log(response)
       navigate('/home')
-    } catch (error) {
+    } catch (error: unknown) {
       console.log('An unexpected error occurred. Please try again later.');
       console.log(error);
 
-      if (error.response && error.response.status === 400) {
-        toast.error('EDV ou senha inválidos');
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.status === 400) {
+          toast.error('EDV ou senha inválidos');
+        }
+      } else {
+        toast.error('Ocorreu um erro inesperado.');
       }
     }
-  };
+  }
 
   return (
     <PageWrapper>

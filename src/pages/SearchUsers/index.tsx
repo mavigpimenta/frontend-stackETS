@@ -25,7 +25,7 @@ interface TokenData {
     role: string;
 }
 
-export const SearchUsers: React.FC = ({ onDelete, onEdit }: { onDelete?: () => void, onEdit?: () => void }) => {
+export const SearchUsers: React.FC = () => {
     const [users, setUsers] = useState<User[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
