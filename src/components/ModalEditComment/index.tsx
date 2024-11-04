@@ -20,7 +20,7 @@ export const ModalEditComment: React.FC<ModalFormProps> = ({onSubmit, descriptio
             <ModalContent>
               <CloseButton onClick={onClose}>✖</CloseButton>
               <PostForm onSubmit={onSubmit}>
-                <Textarea label={selectedLanguage === 'pt-BR' ? 'Descrição' : selectedLanguage === 'en-US' ? 'Description' : 'Beschreibung'} rows="4" value={description} onChange={(e) => setDescription(e.target.value)}/>
+                <Textarea label={selectedLanguage === 'pt-BR' ? 'Descrição' : selectedLanguage === 'en-US' ? 'Description' : 'Beschreibung'} rows={4} value={description} onChange={(e) => setDescription(e.target.value)}/>
                 <Button>{selectedLanguage === 'pt-BR' ? 'Publicar' : selectedLanguage === 'en-US' ? 'Publish' : 'Veröffentlichen'}</Button>
               </PostForm>
             </ModalContent>
