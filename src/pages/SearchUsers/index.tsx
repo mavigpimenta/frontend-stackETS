@@ -30,7 +30,7 @@ export const SearchUsers: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [searchTerm, setSearchTerm] = useState("");
-    const { selectedLanguage, setLanguage } = useLanguage();
+    const { selectedLanguage } = useLanguage();
     const role = localStorage.getItem("role");
     const [tokenData, setTokenData] = useState<TokenData | null>(null);
     const navigate = useNavigate();
@@ -42,6 +42,7 @@ export const SearchUsers: React.FC = () => {
             setTokenData(decodedToken);
         }
     }, []);
+
     const [userColors, setUserColors] = useState<{ [key: string]: string }>({});
 
     const fetchUsers = async () => {
@@ -66,7 +67,7 @@ export const SearchUsers: React.FC = () => {
         users.forEach((user) => {
             const storedColor = localStorage.getItem(user.name);
             if (!storedColor) {
-                const newColor = generateColorForUser(user.name);
+                const newColor = generateColorForUser();
                 localStorage.setItem(user.name, newColor);
                 setUserColors((prevColors) => ({
                     ...prevColors,
@@ -81,7 +82,7 @@ export const SearchUsers: React.FC = () => {
         });
     }, [users]);
 
-    const generateColorForUser = (userName: string) => {
+    const generateColorForUser = () => {
         const letters = "0123456789ABCDEF";
         let color = "#";
         for (let i = 0; i < 6; i++) {
@@ -144,12 +145,17 @@ export const SearchUsers: React.FC = () => {
     return (
         <PageEnveloper>
             <PageWrapper>
+                {tokenData && (
+                    <Header>
+                        <h2>Welcome, {tokenData.role === 'ADMIN' ? 'Administrator' : 'User'}!</h2>
+                    </Header>
+                )}
                 <Search title={searchTerm} setTitle={setSearchTerm} />
                 {users.map((user) => (
                     <CardWrapper key={user._id}>
                         <Header>
                             <UserIcon bgColor={userColors[user.name] || "#ccc"}>{user.name.charAt(0).toUpperCase()}</UserIcon>
-                            { role == "ADMIN" &&
+                            {role === "ADMIN" &&
                                 <IconWrapper>
                                     <StyledIcon src={Delete} onClick={() => handleDelete(user._id)} />
                                 </IconWrapper>
@@ -158,11 +164,11 @@ export const SearchUsers: React.FC = () => {
                         <Title>{user.name}</Title>
                         <Description><b>EDV:</b> {user.edv}</Description>
                         <Description><b>{selectedLanguage === 'pt-BR' ? 'Data de Nascimento: ' : selectedLanguage === 'en-US' ? 'Birth Date: ' : 'Geburtsdatum: '}</b>{formatDate(user.birthDate)}</Description>
-                        <Description><b>{selectedLanguage === 'pt-BR' ? 'Cargo: ' : selectedLanguage == 'en-US' ? 'Role: ' : 'Position: '}</b>{getRoleLabel(user.role, selectedLanguage)}</Description>
+                        <Description><b>{selectedLanguage === 'pt-BR' ? 'Cargo: ' : selectedLanguage === 'en-US' ? 'Role: ' : 'Position: '}</b>{getRoleLabel(user.role, selectedLanguage)}</Description>
                     </CardWrapper>
                 ))}
                 <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
-                { role == 'ADMIN' &&
+                {role === 'ADMIN' &&
                     <AddButton onClick={handleRegisterClick} />
                 }
             </PageWrapper>

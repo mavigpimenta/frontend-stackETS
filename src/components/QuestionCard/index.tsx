@@ -39,9 +39,8 @@ const QuestionCard = ({
 }) => {
     const [userColors, setUserColors] = useState<{ [key: string]: string }>({});
     const { selectedLanguage } = useLanguage();
-    const [bgColor, setBgColor] = useState("#ccc");
-    const [userInitial, setUserInitial] = useState("U");
-    const [userName, setUserName] = useState("Usuário");
+    const [bgColor] = useState("#ccc");
+    const [userInitial] = useState("U");
     const [tokenData, setTokenData] = useState<TokenData | null>(null);
 
     useEffect(() => {
@@ -54,10 +53,10 @@ const QuestionCard = ({
 
     useEffect(() => {
         comments.forEach((comment) => {
-            if (comment.userName) { // Verificação adicional para garantir que userName não seja undefined
+            if (comment.userName) { 
                 const storedColor = localStorage.getItem(comment.userName);
                 if (!storedColor) {
-                    const newColor = generateColorForUser(comment.userName);
+                    const newColor = generateColorForUser();
                     localStorage.setItem(comment.userName, newColor);
                     setUserColors((prevColors) => ({
                         ...prevColors,
@@ -73,16 +72,7 @@ const QuestionCard = ({
         });
     }, [comments]);
 
-    useEffect(() => {
-        const storedUserName = localStorage.getItem('name') || "Usuário";
-        const storedBgColor = localStorage.getItem(storedUserName) || "#ccc";
-
-        setUserName(formatUserName(storedUserName));
-        setUserInitial(storedUserName.charAt(0).toUpperCase());
-        setBgColor(storedBgColor || getRandomColor());
-    }, []);
-
-    const generateColorForUser = (userName: string) => {
+    const generateColorForUser = () => {
         const letters = "0123456789ABCDEF";
         let color = "#";
         for (let i = 0; i < 6; i++) {
@@ -93,15 +83,6 @@ const QuestionCard = ({
 
     const truncateDescription = (description: string) => {
         return description.length > 64 ? description.slice(0, 64) + "..." : description;
-    };
-
-    const getRandomColor = () => {
-        const letters = "0123456789ABCDEF";
-        let color = "#";
-        for (let i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
     };
 
     const formatUserName = (name: string) => {

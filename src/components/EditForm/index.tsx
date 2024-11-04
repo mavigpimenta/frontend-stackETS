@@ -14,7 +14,7 @@ interface EditFormProps {
 }
 
 export const EditForm: React.FC<EditFormProps> = ({ onSubmit, oldPassword, setOldPassword, password, setPassword, confirmPassword, setConfirmPassword }) => {
-  const { selectedLanguage, setLanguage } = useLanguage();
+  const { selectedLanguage } = useLanguage();
   
   return (
     <FormWrapper onSubmit={onSubmit}>

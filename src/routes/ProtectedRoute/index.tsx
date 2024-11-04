@@ -1,5 +1,4 @@
 import { ReactElement, useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
 import { jwtDecode } from 'jwt-decode';
 
 interface IProtectedRoute {
@@ -44,5 +43,5 @@ export default function ProtectedRoute({ errorPage, targetPage }: IProtectedRout
         return <></>; 
     }
 
-    return isAuthorized ? targetPage : <Navigate to="/" state={{ from: window.location.pathname }} />;
+    return isAuthorized ? targetPage : errorPage;
 }

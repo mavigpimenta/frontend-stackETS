@@ -1,4 +1,3 @@
-import { Input } from "../Input";
 import { CloseButton, ModalContent, ModalOverlay, PostForm } from "./styled.module";
 import { Textarea } from "../Textarea";
 import Button from "../Button";
@@ -14,7 +13,7 @@ interface ModalFormProps {
 
 export const ModalEditComment: React.FC<ModalFormProps> = ({onSubmit, description, setDescription, isopen, onClose }) => {
     if (!isopen) return null;
-    const { selectedLanguage, setLanguage } = useLanguage();
+    const { selectedLanguage } = useLanguage();
       
     return (
         <ModalOverlay>

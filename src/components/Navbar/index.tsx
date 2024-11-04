@@ -15,7 +15,6 @@ const Navbar = () => {
     const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
     const navigate = useNavigate();
     const { selectedLanguage, setLanguage } = useLanguage();
-    const role = localStorage.getItem("role");
     const [userColors, setUserColors] = useState("#ccc");
 
     const handleLanguageSelect = (lang: string) => {
@@ -47,13 +46,13 @@ const Navbar = () => {
         if (storedColor) {
             setUserColors(storedColor);
         } else {
-            const newColor = generateColorForUser(storedUserName);
+            const newColor = generateColorForUser();
             localStorage.setItem(`${storedUserName}`, newColor);
             setUserColors(newColor);
         }
     }, []);
 
-    const generateColorForUser = (userName: string) => {
+    const generateColorForUser = () => {
         const letters = "0123456789ABCDEF";
         let color = "#";
         for (let i = 0; i < 6; i++) {

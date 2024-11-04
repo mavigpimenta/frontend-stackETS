@@ -1,8 +1,5 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaUserCircle } from 'react-icons/fa';
 import { Container, Content, ErrorMessage, LoginButton, SubMessage } from './styled.module';
-import LogoImage from '/Logo.svg'
 import { NavbarContainer, NavbarContent, Image } from '../../components/Navbar/styled.module';
 
 export default function ErrorPage() {

@@ -33,7 +33,7 @@ const MainPage: React.FC = () => {
         posts.forEach((post) => {
             const storedColor = localStorage.getItem(post.comments[0]?.userId?.name);
             if (!storedColor) {
-                const newColor = generateColorForUser(post.comments[0]?.userId?.name);
+                const newColor = generateColorForUser();
                 localStorage.setItem(post.comments[0]?.userId?.name, newColor);
                 setUserColors((prevColors) => ({
                     ...prevColors,
@@ -48,7 +48,7 @@ const MainPage: React.FC = () => {
         });
     }, [posts]);
 
-    const generateColorForUser = (userName: string) => {
+    const generateColorForUser = () => {
         const letters = "0123456789ABCDEF";
         let color = "#";
         for (let i = 0; i < 6; i++) {
@@ -117,7 +117,9 @@ const MainPage: React.FC = () => {
                 {posts && posts.map((post) => (
                     post && post.title ? (
                         <PostCreator key={post._id}>
-                            <PostCreatorIcon bgColor={localStorage.getItem(post.userId.name) || "#ccc"}>{post.userId?.name.charAt(0).toUpperCase()}</PostCreatorIcon>
+                            <PostCreatorIcon bgColor={userColors[post.userId.name] || "#ccc"}>
+                                {post.userId?.name.charAt(0).toUpperCase()}
+                            </PostCreatorIcon>
                             <QuestionCard
                                 isDetails={false}
                                 id={post._id}
@@ -126,15 +128,25 @@ const MainPage: React.FC = () => {
                                     description: comment.description,
                                     userName: comment.userId?.name || 'Anônimo'
                                 }))}
-                                handleSubmitNewComment={() => {}}
-                                setDescriptionComment={() => {}}
+                                handleSubmitNewComment={() => { }}
+                                setDescriptionComment={() => { }}
                                 userId={post.userId?._id || ''}
                                 createdAt={''}
                                 userIdPost={post.userId?._id || ''}
                             >
                                 {truncateDescription(post.description)}
                             </QuestionCard>
+                            {/* Aqui você pode adicionar um estilo diferente para o nome do usuário nos comentários */}
+                            {post.comments.map(comment => (
+                                <div key={comment.description}>
+                                    <span style={{ color: userColors[comment.userId.name] || "#000" }}>
+                                        {comment.userId.name}:
+                                    </span>
+                                    <span>{comment.description}</span>
+                                </div>
+                            ))}
                         </PostCreator>
+
                     ) : null
                 ))}
                 <AddButton onClick={openModal} />
