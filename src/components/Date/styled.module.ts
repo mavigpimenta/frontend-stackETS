@@ -1,5 +1,5 @@
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import Datetime from 'react-datetime';
+import 'react-datetime/css/react-datetime.css';
 import styled from "styled-components";
 
 export const DatePickerWrapper = styled.div`
@@ -16,7 +16,7 @@ export const DatePickerWrapper = styled.div`
   }
 `;
 
-export const StyledDatePicker = styled(DatePicker)`
+export const StyledDatetime = styled(Datetime)`
   padding: 0.75rem;
   font-size: 1rem;
   border: none; 
@@ -26,6 +26,12 @@ export const StyledDatePicker = styled(DatePicker)`
   box-sizing: border-box;
   background-color: transparent;
   color: var(--text-color);
+
+  input {
+    border: none;
+    outline: none; 
+    background: transparent; 
+  }
 
   &:focus {
     border-bottom-color: #007bc0; 

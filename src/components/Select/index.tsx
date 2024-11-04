@@ -10,14 +10,14 @@ interface SelectProps {
 
 export const Select: React.FC<SelectProps> = ({ label, value, onChange }) => {
   const role = localStorage.getItem("role");
-  const { selectedLanguage, setLanguage } = useLanguage();
+  const { selectedLanguage } = useLanguage();
 
   return (
     <>
       <label>{label}</label>
 
       <StyledSelect value={value} onChange={onChange}>
-        <StyledOption value="">{selectedLanguage === 'pt-BR' ? 'Selecione seu cargo' : selectedLanguage === 'en-US' ? 'Select your role' : 'Wählen Sie Ihre Position aus'}</StyledOption>
+        <StyledOption value="" disabled>{selectedLanguage === 'pt-BR' ? 'Selecione seu cargo' : selectedLanguage === 'en-US' ? 'Select your role' : 'Wählen Sie Ihre Position aus'}</StyledOption>
         {role == "ADMIN" &&
           <>
             <StyledOption value="ADMIN">{selectedLanguage === 'pt-BR' ? 'Administrador' : selectedLanguage === 'en-US' ? 'Administrator' : 'Administrator'}</StyledOption>
