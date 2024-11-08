@@ -59,7 +59,7 @@ const MainPage: React.FC = () => {
 
     const getAllPosts = async (searchTitle: string = '') => {
         try {
-            const response = await axios.get(`http://localhost:8000/post/getTitle?title=${searchTitle}&page=${currentPage}`);
+            const response = await axios.get(`${import.meta.env.API_URL}/post/getTitle?title=${searchTitle}&page=${currentPage}`);
             setPosts(response.data.posts);
             setTotalPages(response.data.totalPages);
             console.log(response.data);
@@ -82,7 +82,7 @@ const MainPage: React.FC = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:8000/post/create', {
+            const response = await axios.post(`${import.meta.env.API_URL}/post/create`, {
                 title,
                 description
             }, {

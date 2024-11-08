@@ -22,7 +22,7 @@ const RegisterPage = () => {
         const formattedDate = date ? date.toISOString().split('T')[0] : null
 
         try {
-            const response = await axios.post('http://localhost:8000/user/register', {
+            const response = await axios.post(`${import.meta.env.API_URL}/user/register`, {
                 name,
                 birthDate: formattedDate,
                 edv,
