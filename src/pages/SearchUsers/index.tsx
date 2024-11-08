@@ -47,7 +47,7 @@ export const SearchUsers: React.FC = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get(`${import.meta.env.API_URL}/user/getUsers?page=${currentPage}&name=${searchTerm}`, {
+            const response = await axios.get(`https://backend-stackets.onrender.com/user/getUsers?page=${currentPage}&name=${searchTerm}`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 }
@@ -124,7 +124,7 @@ export const SearchUsers: React.FC = () => {
     const handleDelete = async (userId: string) => {
         if (window.confirm("Are you sure you want to delete this user?")) {
             try {
-                await axios.delete(`${import.meta.env.API_URL}/user/delete/${userId}`, {
+                await axios.delete(`https://backend-stackets.onrender.com/user/delete/${userId}`, {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`,
                     }
