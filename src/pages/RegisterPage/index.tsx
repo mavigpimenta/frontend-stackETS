@@ -38,8 +38,6 @@ const RegisterPage = () => {
             console.log(error)
             toast.error('Usuário não foi criado');
         }
-
-        console.log(import.meta.env.API_URL);
     }
 
     return (
