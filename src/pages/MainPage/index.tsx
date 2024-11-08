@@ -59,7 +59,7 @@ const MainPage: React.FC = () => {
 
     const getAllPosts = async (searchTitle: string = '') => {
         try {
-            const response = await axios.get(`https://backend-stackets.onrender.com/post/getTitle?title=${searchTitle}&page=${currentPage}`);
+            const response = await axios.get(`${import.meta.env.API_URL}/post/getTitle?title=${searchTitle}&page=${currentPage}`);
             setPosts(response.data.posts);
             setTotalPages(response.data.totalPages);
             console.log(response.data);
@@ -82,7 +82,7 @@ const MainPage: React.FC = () => {
         }
 
         try {
-            const response = await axios.post('https://backend-stackets.onrender.com/post/create', {
+            const response = await axios.post(`${import.meta.env.API_URL}/post/create`, {
                 title,
                 description
             }, {
