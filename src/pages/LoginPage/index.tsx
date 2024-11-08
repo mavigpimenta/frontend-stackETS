@@ -14,7 +14,7 @@ export const LoginPage = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`${import.meta.env.API_URL}/user/login`, {
+      const response = await axios.post(`https://backend-stackets.onrender.com/user/login`, {
         edv: edv,
         password: password,
       });
