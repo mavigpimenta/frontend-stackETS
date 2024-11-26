@@ -136,7 +136,6 @@ const MainPage: React.FC = () => {
                             >
                                 {truncateDescription(post.description)}
                             </QuestionCard>
-                            {/* Aqui você pode adicionar um estilo diferente para o nome do usuário nos comentários */}
                             {post.comments.map(comment => (
                                 <div key={comment.description}>
                                     <span style={{ color: userColors[comment.userId.name] || "#000" }}>
@@ -146,7 +145,6 @@ const MainPage: React.FC = () => {
                                 </div>
                             ))}
                         </PostCreator>
-
                     ) : null
                 ))}
                 <AddButton onClick={openModal} />
