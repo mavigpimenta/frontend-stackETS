@@ -31,7 +31,7 @@ const PostDetailPage = () => {
 
     const getPost = async () => {
         try {
-            const response = await axios.get(`https://backend-stackets.onrender.com/post/getById/:${id}`);
+            const response = await axios.get(`https://backend-stackets.onrender.com/post/getById/${id}`);
             setPost(response.data);
         } catch (error) {
             console.error("Erro ao carregar o post:", error);
