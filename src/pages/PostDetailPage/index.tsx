@@ -31,7 +31,7 @@ const PostDetailPage = () => {
 
     const getPost = async () => {
         try {
-            const response = await axios.get(`https://backend-stackets.onrender.com/post/getById/${id}`);
+            const response = await axios.get(`http://localhost:8000/post/getById/${id}`);
             setPost(response.data);
         } catch (error) {
             console.error("Erro ao carregar o post:", error);
@@ -69,7 +69,7 @@ const PostDetailPage = () => {
 
     const deletePost = async () => {
         try {
-            await axios.delete(`https://backend-stackets.onrender.com/post/delete/${id}`, {
+            await axios.delete(`http://localhost:8000/post/delete/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 }
@@ -84,7 +84,7 @@ const PostDetailPage = () => {
 
     const handleSubmitEditPost = async () => {
         try {
-            await axios.patch(`https://backend-stackets.onrender.com/post/edit/${id}`, {
+            await axios.patch(`http://localhost:8000/post/edit/${id}`, {
                 title,
                 description
             }, {
@@ -108,7 +108,7 @@ const PostDetailPage = () => {
         }
 
         try {
-            await axios.post(`https://backend-stackets.onrender.com/comment/create`, {
+            await axios.post(`http://localhost:8000/comment/create`, {
                 postId: id,
                 description: descriptionComment,
             }, {
@@ -128,7 +128,7 @@ const PostDetailPage = () => {
 
     const handleSubmitEditComment = async () => {
         try {
-            await axios.patch(`https://backend-stackets.onrender.com/comment/edit/${commentIdToEdit}`, {
+            await axios.patch(`http://localhost:8000/comment/edit/${commentIdToEdit}`, {
                 description: commentDescriptionToEdit
             }, {
                 headers: {
@@ -145,7 +145,7 @@ const PostDetailPage = () => {
 
     const handleDeleteComment = async (commentId: string) => {
         try {
-            await axios.delete(`https://backend-stackets.onrender.com/comment/delete/${commentId}`, {
+            await axios.delete(`http://localhost:8000/comment/delete/${commentId}`, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 }

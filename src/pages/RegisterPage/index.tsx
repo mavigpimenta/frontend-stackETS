@@ -22,7 +22,7 @@ const RegisterPage = () => {
         const formattedDate = date ? date.toISOString().split('T')[0] : null
 
         try {
-            const response = await axios.post(`https://backend-stackets.onrender.com/user/register`, {
+            const response = await axios.post(`http://localhost:8000/user/register`, {
                 name,
                 birthDate: formattedDate,
                 edv,
