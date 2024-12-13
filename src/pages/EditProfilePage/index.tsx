@@ -17,7 +17,7 @@ const EditProfilePage = () => {
         e.preventDefault();
         const token = localStorage.getItem('token');
         try {
-            const response = await axios.put(`http://localhost:8000/user/update`, {
+            const response = await axios.put(`https://backend-stackets.onrender.com/user/update`, {
                 oldPassword,
                 newPassword: password,
                 confirmPassword,
